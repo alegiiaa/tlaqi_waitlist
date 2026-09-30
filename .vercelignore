@@ -1,0 +1,11 @@
+# Design files
+*.ai
+*.psd
+*.sketch
+
+# Mac OS metadata
+._*
+.DS_Store
+
+# Large asset files that shouldn't be deployed
+Tlaqi visual identity.ai

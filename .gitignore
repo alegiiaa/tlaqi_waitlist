@@ -23,6 +23,12 @@
 # misc
 .DS_Store
 *.pem
+._*
+
+# Design source files
+*.ai
+*.psd
+*.sketch
 
 # debug
 npm-debug.log*
@@ -39,3 +45,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local database components (frontend-only repository)
+/supabase/
+/src/lib/supabase.ts

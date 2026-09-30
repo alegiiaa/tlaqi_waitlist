@@ -1,8 +1,17 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* TLAQI Brand Colors */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --tlaqi-beige: #EEF6DF;
+  --tlaqi-mahogany: #c34900;
+  --tlaqi-temptress: #341D2B;
+  --tlaqi-green: #67C090;
+
+  --radius: 0.625rem;
 }
 
 @theme inline {
@@ -10,17 +19,140 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Custom TLAQI colors for Tailwind */
+  --color-tlaqi-beige: #EEF6DF;
+  --color-tlaqi-mahogany: #c34900;
+  --color-tlaqi-temptress: #341D2B;
+  --color-tlaqi-green: #67C090;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Dark theme (default for waitlist) */
+:root {
+  --background: #1a0e1c;
+  --foreground: #EEF6DF;
+  --card: #341D2B;
+  --card-foreground: #EEF6DF;
+  --popover: #341D2B;
+  --popover-foreground: #EEF6DF;
+  --primary: #c34900;
+  --primary-foreground: #EEF6DF;
+  --secondary: #341D2B;
+  --secondary-foreground: #EEF6DF;
+  --muted: #2a1a24;
+  --muted-foreground: #a89a9e;
+  --accent: #67C090;
+  --accent-foreground: #1a0e1c;
+  --destructive: #ef4444;
+  --border: rgba(238, 246, 223, 0.1);
+  --input: rgba(238, 246, 223, 0.15);
+  --ring: #c34900;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom animations for waitlist */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)); }
+  50% { transform: translateY(-20px) rotate(var(--rotation, 0deg)); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes success-pulse {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes success-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(103, 192, 144, 0.4); }
+  50% { box-shadow: 0 0 60px rgba(103, 192, 144, 0.8), 0 0 100px rgba(103, 192, 144, 0.4); }
+}
+
+@keyframes checkmark-draw {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes celebration-ring {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 60s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-success-pulse {
+  animation: success-pulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-success-glow {
+  animation: success-glow 2s ease-in-out infinite;
+}
+
+.animate-checkmark {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: checkmark-draw 0.4s ease-out 0.3s forwards;
+}
+
+.animate-ring {
+  animation: celebration-ring 0.8s ease-out forwards;
 }
